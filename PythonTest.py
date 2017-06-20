@@ -127,6 +127,21 @@ def demo_dict():
     del dicta[1]
     print 7, dicta
 
+
+def demo_set():
+    lista = [1, 2, 3]
+    seta = set(lista)
+    setb = set((2, 3, 4))
+    print 1, seta
+    print 3, seta.intersection(setb), seta & setb
+    print 4, seta | setb, seta.union(setb)
+    print 5, seta - setb
+    seta.add('x')
+    print 6, seta
+    print len(seta)
+    print seta.isdisjoint(set((1, 2)))
+
+
 if __name__ == '__main__':
     print 'hello world'
     # demo_string()
@@ -134,6 +149,7 @@ if __name__ == '__main__':
     # demo_buildinfunction()
     # demo_controlflow()
     # demo_list()
-    demo_dict()
+    # demo_dict()
+    demo_set()
 
 
