@@ -142,6 +142,89 @@ def demo_set():
     print seta.isdisjoint(set((1, 2)))
 
 
+class User:
+    type = 'USER'   # 封装
+
+    def __init__(self, name, uid):
+        self.name = name
+        self.uid = uid
+
+    def __repr__(self):
+        return 'Im ' + self.name + ' ' + str(self.uid)
+
+
+class Guest(User):  # 继承
+    def __repr__(self):  # 多态
+        return 'im guest:' + self.name + ' ' + str(self.uid)
+
+
+class Admin(User):
+    type = 'ADMIN'
+
+    def __init__(self, name, uid, group):
+        User.__init__(self, name, uid)
+        self.group = group
+
+    def __repr__(self):  # 多态
+        return 'im ' + self.name + ' ' + str(self.uid) + ' ' + self.group
+
+
+def create_user(type):  # factory
+    if type == 'USER':
+        return User('u1', 1)
+    elif type == 'ADMIN':
+        return Admin('a1', 101, 'g1')
+    else:
+        return Guest('gu1', 201)
+
+
+def demo_exception():
+    try:
+        print 2 / 1
+        # print 2 / 0
+        # if type == 'c':
+        raise Exception('Raise Error', 'NowCoder')
+    except Exception as e:
+        print 'error:', e
+    finally:
+        print 'clean up'
+
+
+def demo_random():
+    # 1 - 100
+    # random.seed(1)
+    # x = prex * 100007 % xxxx
+    # prex  = x 幂等性
+    print 1, int(random.random() * 100)
+    print 2, random.randint(0, 200)
+    print 3, random.choice(range(0, 100, 10))   # random pick from list
+    print 4, random.sample(range(0, 100), 4)    # random pick 4 elements
+    a = [1, 2, 3, 4, 5]
+    random.shuffle(a)
+    print 5, a
+
+
+def demo_re():
+    str = 'abc123def12gh15'
+    p1 = re.compile('[\d]+')
+    p2 = re.compile('\d')
+    print 1, p1.findall(str)
+    print 2, p2.findall(str)
+    # \t\n
+    str = 'a@163.com;b@gmail.com;c@qq.com;e0@126.com;z@qq.com'
+    p3 = re.compile('[\w]+@[163|qq]+\.com')
+    print 3, p3.findall(str)
+
+    str = '<html><h>title</h><body>xxx</body></html>'
+    p4 = re.compile('<h>[^<]+</h>')
+    print 4, p4.findall(str)
+    p4 = re.compile('<h>([^<]+)</h><body>([^<]+)</body>')   # ()是要选取的部分
+    print 5, p4.findall(str)
+
+    str = 'xx2016-06-11yy'
+    p5 = re.compile('\d{4}-\d{2}-\d{2}')    # {}匹配n个
+    print p5.findall(str)
+
 if __name__ == '__main__':
     print 'hello world'
     # demo_string()
@@ -150,6 +233,17 @@ if __name__ == '__main__':
     # demo_controlflow()
     # demo_list()
     # demo_dict()
-    demo_set()
+    # demo_set()
+    '''
+    user1 = User('u1', 1)
+    print user1
+    admin1 = Admin('a1', 101, 'g1')
+    print admin1
+    print create_user('USERX')
+    '''
+    # demo_exception()
+    # demo_random()
+    demo_re()
+
 
 
